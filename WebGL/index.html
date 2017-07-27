@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<script src = "js/three.js"></script>
+</head>
+<body>
+	
+</body>
+	<script>
+		//定义一个场景
+		var scene = new THREE.Scene();
+		//定义一个相机
+		var camera = new THREE.PerspectiveCamera(75,window.innerWidth/window.innerHeight,1,1000);
+		//定义一个渲染器
+		var renderer = new THREE.WebGLRenderer();
+		//改变渲染器的颜色或清除默认渲染器的颜色
+		renderer.setClearColor("yellowgreen");
+		//给渲染器设置大小
+		renderer.setSize(window.innerWidth,window.innerHeight);
+		//渲染结果
+		document.body.appendChild(renderer.domElement);
+		//定义一个几何体
+		var geometry = new THREE.CubeGeometry(3,1,2);
+		//给几何体定义一个材质
+		var material = new THREE.MeshBasicMaterial({color:0xf0ff0f});
+		//网格对象（几何体和几何体的材质组成）
+		var cube = new THREE.Mesh(geometry,material);
+		//网格加入到场景里
+		scene.add(cube);
+		//相机的距离
+		camera.position.z = 5;
+		//循环渲染
+		function render(){
+			//不断的去执行render
+			requestAnimationFrame(render);
+			//叫网格旋转起来
+			cube.rotation.z += 0.01;
+			//cube.rotation.y -= 0.01;
+			//渲染器通过场景与相机把最终的东西渲染出去
+			renderer.render(scene,camera);
+		}
+		render();
+
+
+
+		
+	</script>
+</html>
